@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth;
+use App\Http\Controllers\Top;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Top::class, 'index'])->name('user.baseUrl');
+
+/* User Routes Start */
+
+// Authentication
+Route::match(['get', 'post'], '/auth/login', [Auth::class, 'login'])->name('user.login');
+Route::match(['get', 'post'], '/auth/register', [Auth::class, 'register'])->name('user.register');
+
+/* User Routes End */
+
